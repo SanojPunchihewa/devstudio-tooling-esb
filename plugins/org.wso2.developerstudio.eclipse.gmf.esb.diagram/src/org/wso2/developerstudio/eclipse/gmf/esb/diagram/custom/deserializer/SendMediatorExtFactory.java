@@ -74,8 +74,10 @@ public class SendMediatorExtFactory extends SendMediatorFactory {
 
             Endpoint endpoint = null;
             try {
-                endpoint = EndpointFactory.getEndpointFromElement(epElement, true, null);
+                endpoint = DummyEndpointFactory.getEndpointFromElement(epElement, true, null);
             } catch (Exception e) {
+                
+                System.out.println("Err = " + e);
 
                 if (omElement.getAttribute(ATT_KEY) != null) {
                     endpoint = new IndirectEndpoint();
@@ -138,6 +140,7 @@ public class SendMediatorExtFactory extends SendMediatorFactory {
                 OMElement httpElement = omElement
                         .getFirstChildWithName(new QName(SynapseConstants.SYNAPSE_NAMESPACE, "http"));
                 if (httpElement != null) {
+                    System.out.println(" -------- creating http ep -----------");
                     endpoint = new HTTPEndpoint();
                 }
 
